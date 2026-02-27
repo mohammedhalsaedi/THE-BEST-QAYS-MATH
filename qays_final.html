@@ -1,0 +1,748 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>The Best Qays Math 🌟</title>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka+One&family=Nunito:wght@600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{box-sizing:border-box;margin:0;padding:0;}
+body{font-family:'Nunito',sans-serif;background:#FFFBF0;min-height:100vh;}
+.ff{font-family:'Fredoka One',cursive;}
+header{background:linear-gradient(135deg,#9B5DE5,#FF6B9D,#FF6B35);padding:16px;text-align:center;}
+header h1{font-family:'Fredoka One',cursive;font-size:clamp(1.6rem,4vw,2.8rem);color:#fff;text-shadow:3px 3px 0 rgba(0,0,0,.2);letter-spacing:2px;}
+header p{color:rgba(255,255,255,.9);font-weight:700;font-size:.9rem;margin-top:4px;}
+.scorebar{background:#1A1A2E;display:flex;justify-content:center;gap:14px;padding:8px 12px;flex-wrap:wrap;}
+.si{display:flex;align-items:center;gap:4px;color:#fff;font-weight:800;font-size:.82rem;}
+.badge{background:#FFD93D;color:#1A1A2E;padding:2px 10px;border-radius:20px;font-family:'Fredoka One',cursive;font-size:.95rem;min-width:28px;text-align:center;}
+.tabs{display:flex;justify-content:center;gap:7px;padding:10px 8px;background:#fff;border-bottom:3px solid #eee;flex-wrap:wrap;}
+.tb{font-family:'Fredoka One',cursive;font-size:.9rem;padding:9px 16px;border:3px solid transparent;border-radius:50px;cursor:pointer;transition:all .2s;background:#f0f0f0;color:#1A1A2E;}
+.tb.active{transform:translateY(-2px);}
+.tb.t-math.active{background:#FF6B35;color:#fff;border-color:#FF6B35;box-shadow:0 4px 14px #FF6B3588;}
+.tb.t-word.active{background:#4ECDC4;color:#fff;border-color:#4ECDC4;box-shadow:0 4px 14px #4ECDC488;}
+.tb.t-draw.active{background:#E040FB;color:#fff;border-color:#E040FB;box-shadow:0 4px 14px #E040FB88;}
+.tb.t-novels.active{background:#9B5DE5;color:#fff;border-color:#9B5DE5;box-shadow:0 4px 14px #9B5DE588;}
+main{padding:14px;max-width:1000px;margin:0 auto;}
+.section{display:none;}
+.section.active{display:block;}
+.card{background:#fff;border-radius:20px;padding:20px;box-shadow:0 6px 24px rgba(0,0,0,.1);}
+
+/* ─── MATH ─── */
+.math-card{border:3px solid #FF6B35;}
+.qcard{background:linear-gradient(135deg,#FFF3E0,#FFE0B2);border-radius:16px;padding:22px;text-align:center;border:3px dashed #FF6B35;margin-bottom:12px;animation:slideIn .4s ease;}
+@keyframes slideIn{from{opacity:0;transform:translateY(-12px);}to{opacity:1;transform:translateY(0);}}
+.qtext{font-family:'Fredoka One',cursive;font-size:clamp(2rem,6vw,3rem);color:#1A1A2E;}
+.tbar{height:8px;background:#eee;border-radius:4px;margin-bottom:14px;overflow:hidden;}
+.tfill{height:100%;border-radius:4px;transition:width 1s linear,background .5s;}
+.agrid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:12px;}
+.abtn{padding:14px;font-family:'Fredoka One',cursive;font-size:1.3rem;border:3px solid #ddd;border-radius:14px;cursor:pointer;background:#fff;color:#1A1A2E;transition:all .15s;}
+.abtn:hover:not(:disabled){transform:scale(1.05);border-color:#FF6B35;background:#FFF3E0;}
+.abtn.correct{background:#06D6A0;color:#fff;border-color:#06D6A0;}
+.abtn.wrong{background:#EF233C;color:#fff;border-color:#EF233C;}
+.feedback{font-family:'Fredoka One',cursive;font-size:1.2rem;text-align:center;min-height:36px;}
+.lvl-btns{display:flex;gap:6px;}
+.lbtn{padding:5px 12px;border-radius:20px;border:2px solid #ddd;cursor:pointer;font-weight:800;font-size:.85rem;transition:all .2s;}
+.lbtn.active{background:#FF6B35;color:#fff;border-color:#FF6B35;}
+
+/* ─── WORD SEARCH ─── */
+.ws-card{border:3px solid #4ECDC4;}
+#wsgrid{display:inline-grid;gap:2px;background:#1A1A2E;border:4px solid #1A1A2E;border-radius:10px;overflow:hidden;user-select:none;}
+.wc{width:30px;height:30px;display:flex;align-items:center;justify-content:center;font-family:'Fredoka One',cursive;font-size:.9rem;background:#fff;cursor:pointer;color:#1A1A2E;font-weight:700;transition:background .1s;}
+.wc.sel{background:#FFD93D;}
+.wlist{display:grid;grid-template-columns:1fr 1fr;gap:4px;}
+.witem{display:flex;align-items:center;gap:4px;padding:4px 7px;border-radius:8px;background:#f5f5f5;font-weight:700;font-size:.75rem;transition:all .3s;}
+.witem.found{background:#06D6A0;color:#fff;text-decoration:line-through;}
+
+/* ─── DRAWING ─── */
+.draw-card{border:3px solid #E040FB;}
+.lessonpick{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px;}
+.lpick{padding:6px 12px;border-radius:20px;border:2px solid #ddd;cursor:pointer;font-weight:700;font-size:.82rem;transition:all .2s;background:#f5f5f5;}
+.stepbullets{display:flex;gap:4px;flex-wrap:wrap;margin-bottom:12px;}
+.sbullet{width:32px;height:32px;border-radius:50%;border:2px solid #ddd;background:#f5f5f5;color:#aaa;font-family:'Fredoka One',cursive;font-size:.85rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all .2s;}
+.stepc{border-radius:16px;padding:16px;margin-bottom:12px;}
+.draw-hint{background:#fff;border-radius:10px;padding:8px 12px;border:2px dashed;margin-bottom:10px;font-family:'Fredoka One',cursive;font-size:.88rem;text-align:center;}
+#drawCanvas{border-radius:14px;display:block;cursor:crosshair;touch-action:none;width:100%;max-width:500px;background:#fff;}
+.toolrow{display:flex;gap:5px;flex-wrap:wrap;margin-bottom:8px;}
+.toolbtn{padding:5px 10px;border-radius:8px;border:2px solid #ddd;cursor:pointer;font-weight:700;font-size:.78rem;transition:all .2s;background:#fff;}
+.toolbtn.active{background:#E040FB;color:#fff;border-color:#E040FB;}
+.colordots{display:flex;gap:5px;flex-wrap:wrap;align-items:center;}
+.cdot{width:24px;height:24px;border-radius:50%;cursor:pointer;border:3px solid transparent;transition:all .15s;}
+.cdot.active{border-color:#1A1A2E;transform:scale(1.3);}
+.canvasbtn{padding:7px 13px;border-radius:10px;border:none;cursor:pointer;font-family:'Fredoka One',cursive;font-size:.88rem;transition:all .2s;}
+
+/* ─── NOVELS ─── */
+.novels-card{border:3px solid #9B5DE5;}
+.novgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:12px;}
+.novitem{border-radius:16px;padding:16px;cursor:pointer;text-align:center;color:#fff;box-shadow:0 4px 16px rgba(0,0,0,.18);transition:transform .2s,box-shadow .2s;border:3px solid transparent;}
+.novitem:hover{transform:translateY(-4px);box-shadow:0 10px 28px rgba(0,0,0,.25);}
+.novitem.read-done{border-color:#FFD93D;}
+.charsgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:10px;margin-bottom:16px;}
+.charcard{border-radius:12px;padding:12px;cursor:pointer;transition:all .2s;}
+.pagetext{background:#FFFBF0;border-radius:14px;padding:20px;min-height:240px;margin-bottom:18px;font-size:1rem;line-height:1.85;color:#333;font-weight:600;white-space:pre-line;}
+.pagebar{display:flex;gap:4px;margin-bottom:14px;}
+.pbar-seg{flex:1;height:6px;border-radius:3px;transition:background .3s;}
+
+/* ─── POPUP ─── */
+.popup-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,.65);z-index:200;align-items:center;justify-content:center;}
+.popup-overlay.show{display:flex;}
+.popup-box{background:#fff;border-radius:24px;padding:30px 24px;text-align:center;max-width:300px;width:90%;border:5px solid #FFD93D;animation:popIn .5s cubic-bezier(.175,.885,.32,1.275);}
+@keyframes popIn{from{transform:scale(0) rotate(-10deg);}to{transform:scale(1) rotate(0);}}
+.popup-box .pe{font-size:3.5rem;}
+.popup-box h2{font-family:'Fredoka One',cursive;font-size:1.8rem;color:#FF6B35;margin:8px 0;}
+.popup-box p{font-size:.92rem;font-weight:700;color:#666;margin-bottom:16px;}
+.popup-box button{padding:9px 24px;font-family:'Fredoka One',cursive;font-size:1rem;background:#FF6B35;color:#fff;border:none;border-radius:50px;cursor:pointer;}
+
+@media(max-width:500px){.wc{width:23px;height:23px;font-size:.7rem;}.agrid{grid-template-columns:1fr 1fr;}.wlist{grid-template-columns:1fr;}}
+</style>
+</head>
+<body>
+<header>
+  <h1>🌟 The Best Qays Math 🌟</h1>
+  <p>Math · Word Search · Drawing School · Story Library</p>
+</header>
+
+<div class="scorebar">
+  <div class="si">🏆 Math: <span class="badge" id="s-math">0</span></div>
+  <div class="si">🔍 Words: <span class="badge" id="s-words">0</span></div>
+  <div class="si">🎨 Art: <span class="badge" id="s-art">0</span></div>
+  <div class="si">📚 Stories: <span class="badge" id="s-stories">0</span></div>
+  <div class="si">⚡ Streak: <span class="badge" id="s-streak">0</span></div>
+</div>
+
+<div class="tabs">
+  <button class="tb t-math active" onclick="switchTab('math')">🔢 Math</button>
+  <button class="tb t-word" onclick="switchTab('word')">🔍 Words</button>
+  <button class="tb t-draw" onclick="switchTab('draw')">✏️ Drawing</button>
+  <button class="tb t-novels" onclick="switchTab('novels')">📚 Novels</button>
+</div>
+
+<main>
+  <!-- MATH -->
+  <div id="sec-math" class="section active">
+    <div class="card math-card">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:10px;margin-bottom:18px;">
+        <div class="ff" style="font-size:1.6rem;color:#FF6B35;">🧮 Math Challenge!</div>
+        <div class="lvl-btns">
+          <button class="lbtn active" onclick="setLevel('easy',this)">😊 Easy</button>
+          <button class="lbtn" onclick="setLevel('medium',this)">😎 Medium</button>
+          <button class="lbtn" onclick="setLevel('hard',this)">🔥 Hard</button>
+        </div>
+      </div>
+      <div class="qcard" id="qcard"><div class="qtext" id="qtext">Loading...</div></div>
+      <div class="tbar"><div class="tfill" id="tfill" style="width:100%"></div></div>
+      <div class="agrid" id="agrid"></div>
+      <div class="feedback" id="feedback"></div>
+      <div style="text-align:center;font-weight:700;color:#bbb;font-size:.82rem;margin-top:8px;">⚡ Streak: <span id="streak-disp">0</span></div>
+    </div>
+  </div>
+
+  <!-- WORD SEARCH -->
+  <div id="sec-word" class="section">
+    <div class="card ws-card">
+      <div class="ff" style="font-size:1.6rem;color:#4ECDC4;margin-bottom:4px;">📰 Newspaper Word Search!</div>
+      <div style="color:#777;font-weight:600;font-size:.88rem;margin-bottom:14px;">Click and drag to find hidden words in ALL directions! 🔍</div>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start;">
+        <div style="overflow-x:auto;user-select:none;" id="wsgrid-wrap">
+          <div id="wsgrid"></div>
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <div class="ff" style="color:#1A1A2E;margin-bottom:4px;font-size:1rem;">🎯 Find These!</div>
+          <div id="wprog" style="color:#999;font-weight:700;font-size:.82rem;margin-bottom:8px;">Found: 0 / 0</div>
+          <div class="wlist" id="wlist"></div>
+          <button onclick="newWordGame()" style="margin-top:10px;display:block;width:100%;padding:9px;font-family:'Fredoka One',cursive;font-size:.95rem;background:#4ECDC4;color:#fff;border:none;border-radius:12px;cursor:pointer;">🔄 New Puzzle!</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DRAWING -->
+  <div id="sec-draw" class="section">
+    <div class="card draw-card">
+      <div class="ff" style="font-size:1.6rem;color:#E040FB;margin-bottom:4px;">✏️ Drawing School!</div>
+      <div style="color:#777;font-weight:600;font-size:.88rem;margin-bottom:12px;">Follow every step carefully — learn to draw like a real artist! 🎨</div>
+      <div class="lessonpick" id="lessonpick"></div>
+      <div style="display:flex;gap:14px;flex-wrap:wrap;align-items:flex-start;">
+        <!-- Steps panel -->
+        <div style="flex:0 0 260px;min-width:200px;">
+          <div class="stepbullets" id="stepbullets"></div>
+          <div id="stepcontent"></div>
+          <div style="display:flex;gap:8px;margin-bottom:12px;">
+            <button id="prevStep" onclick="changeStep(-1)" style="flex:1;padding:8px;font-family:'Fredoka One',cursive;font-size:.9rem;border:none;border-radius:10px;cursor:pointer;">← Prev</button>
+            <button id="nextStep" onclick="changeStep(1)" style="flex:1;padding:8px;font-family:'Fredoka One',cursive;font-size:.9rem;border:none;border-radius:10px;cursor:pointer;">Next →</button>
+          </div>
+          <div class="ff" style="color:#bbb;font-size:.82rem;margin-bottom:6px;">🏆 Completed:</div>
+          <div id="draw-trophies" style="display:flex;gap:5px;flex-wrap:wrap;font-size:1.4rem;"></div>
+        </div>
+        <!-- Canvas panel -->
+        <div style="flex:2;min-width:260px;">
+          <div class="toolrow">
+            <button class="toolbtn active" onclick="setDrawTool('pen',this)">✏️ Pen</button>
+            <button class="toolbtn" onclick="setDrawTool('eraser',this)">🧹 Erase</button>
+            <button class="toolbtn" onclick="setDrawTool('line',this)">📏 Line</button>
+            <button class="toolbtn" onclick="setDrawTool('circle',this)">⭕ Circle</button>
+            <button class="toolbtn" onclick="setDrawTool('rect',this)">⬜ Rect</button>
+          </div>
+          <div style="display:flex;gap:5px;align-items:center;flex-wrap:wrap;margin-bottom:8px;">
+            <div class="colordots" id="colordots"></div>
+            <input type="range" min="2" max="30" value="6" id="bsize" style="width:65px;accent-color:#E040FB;margin-left:6px;" oninput="brushSz=+this.value">
+            <span id="bsizedisp" style="font-size:.75rem;color:#aaa;font-weight:700;">6px</span>
+          </div>
+          <canvas id="drawCanvas" width="500" height="380"></canvas>
+          <div style="display:flex;gap:7px;margin-top:9px;flex-wrap:wrap;">
+            <button class="canvasbtn" onclick="undoDraw()" style="background:#FFD93D;color:#1A1A2E;">↩️ Undo</button>
+            <button class="canvasbtn" onclick="clearCanvas()" style="background:#eee;color:#1A1A2E;">🗑️ Clear</button>
+            <button class="canvasbtn" onclick="saveArt()" style="background:#06D6A0;color:#fff;">💾 Save Art!</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- NOVELS -->
+  <div id="sec-novels" class="section">
+    <div id="novels-inner"></div>
+  </div>
+</main>
+
+<!-- POPUP -->
+<div class="popup-overlay" id="popup">
+  <div class="popup-box">
+    <div class="pe" id="pop-emoji">🏆</div>
+    <h2 id="pop-title">Amazing!</h2>
+    <p id="pop-msg">You are a superstar!</p>
+    <button onclick="closePopup()">Keep Going! 🎮</button>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════
+// GLOBAL SCORES
+// ══════════════════════════════════════════════════════
+let gMath=0,gWords=0,gArt=0,gStories=0,gStreak=0;
+function updScore(k,v){
+  if(k==='math'){gMath+=v;document.getElementById('s-math').textContent=gMath;}
+  if(k==='words'){gWords+=v;document.getElementById('s-words').textContent=gWords;}
+  if(k==='art'){gArt+=v;document.getElementById('s-art').textContent=gArt;}
+  if(k==='stories'){gStories+=v;document.getElementById('s-stories').textContent=gStories;}
+  if(k==='streak'){gStreak=v;document.getElementById('s-streak').textContent=gStreak;document.getElementById('streak-disp').textContent=gStreak;}
+}
+
+// ══════════════════════════════════════════════════════
+// TABS
+// ══════════════════════════════════════════════════════
+function switchTab(t){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('.tb').forEach(b=>b.classList.remove('active'));
+  document.getElementById('sec-'+t).classList.add('active');
+  document.querySelector('.tb.t-'+t).classList.add('active');
+  if(t==='draw')resizeCanvas();
+}
+
+// ══════════════════════════════════════════════════════
+// POPUP
+// ══════════════════════════════════════════════════════
+function showPopup(emoji,title,msg){
+  document.getElementById('pop-emoji').textContent=emoji;
+  document.getElementById('pop-title').textContent=title;
+  document.getElementById('pop-msg').textContent=msg;
+  document.getElementById('popup').classList.add('show');
+}
+function closePopup(){document.getElementById('popup').classList.remove('show');}
+
+// ══════════════════════════════════════════════════════
+// MATH
+// ══════════════════════════════════════════════════════
+let mathLevel='easy',mathTimer=null,mathTimeLeft=20,mathStreak=0,mathAnswered=false;
+function rand(a,b){return Math.floor(Math.random()*(b-a+1))+a;}
+function shuffArr(a){return [...a].sort(()=>Math.random()-.5);}
+function setLevel(l,btn){mathLevel=l;document.querySelectorAll('.lbtn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');newQuestion();}
+function genQ(){
+  const ops=mathLevel==='easy'?['+','-']:mathLevel==='medium'?['+','-','×']:['+','-','×','÷'];
+  const op=ops[rand(0,ops.length-1)];const mx=mathLevel==='easy'?10:mathLevel==='medium'?20:12;
+  let a,b,ans;
+  if(op==='+'){a=rand(1,mx);b=rand(1,mx);ans=a+b;}
+  else if(op==='-'){a=rand(2,mx);b=rand(1,a);ans=a-b;}
+  else if(op==='×'){a=rand(1,mathLevel==='hard'?12:5);b=rand(1,mathLevel==='hard'?12:5);ans=a*b;}
+  else{b=rand(1,12);ans=rand(1,12);a=b*ans;}
+  const w=new Set();while(w.size<3){const v=ans+rand(-8,8);if(v!==ans&&v>=0)w.add(v);}
+  return{text:`${a} ${op} ${b} = ?`,ans,opts:shuffArr([ans,...w])};
+}
+let currentQ=null;
+function newQuestion(){
+  clearInterval(mathTimer);mathAnswered=false;
+  document.getElementById('feedback').textContent='';
+  document.getElementById('feedback').style.color='';
+  const q=genQ();currentQ=q;
+  document.getElementById('qtext').textContent=q.text;
+  const qc=document.getElementById('qcard');qc.style.animation='none';setTimeout(()=>qc.style.animation='slideIn .4s ease',10);
+  const ag=document.getElementById('agrid');ag.innerHTML='';
+  q.opts.forEach(o=>{
+    const b=document.createElement('button');b.className='abtn';b.textContent=o;
+    b.onclick=()=>checkAns(o,q.ans,b);ag.appendChild(b);
+  });
+  const mt=mathLevel==='easy'?20:mathLevel==='medium'?15:10;
+  mathTimeLeft=mt;updTimer();
+  mathTimer=setInterval(()=>{mathTimeLeft--;updTimer();if(mathTimeLeft<=0){clearInterval(mathTimer);if(!mathAnswered){mathAnswered=true;mathStreak=0;updScore('streak',0);document.getElementById('feedback').textContent="⏰ Time's up!";document.getElementById('feedback').style.color='#EF233C';setTimeout(newQuestion,1500);}}},1000);
+}
+function updTimer(){
+  const mt=mathLevel==='easy'?20:mathLevel==='medium'?15:10;const p=(mathTimeLeft/mt)*100;
+  const f=document.getElementById('tfill');f.style.width=p+'%';
+  f.style.background=p>50?'#06D6A0':p>25?'#FFD93D':'#EF233C';
+}
+function checkAns(sel,cor,btn){
+  if(mathAnswered)return;clearInterval(mathTimer);mathAnswered=true;
+  document.querySelectorAll('.abtn').forEach(b=>b.onclick=null);
+  if(sel===cor){
+    btn.classList.add('correct');
+    const pts=mathLevel==='easy'?10:mathLevel==='medium'?20:30;const bonus=Math.ceil(mathTimeLeft/2);
+    updScore('math',pts+bonus);mathStreak++;updScore('streak',mathStreak);
+    document.getElementById('feedback').textContent=mathStreak>=3?`🔥 ${mathStreak} Streak! +${pts+bonus}pts`:`✅ Correct! +${pts+bonus}pts`;
+    document.getElementById('feedback').style.color='#06D6A0';
+    if(mathStreak>0&&mathStreak%5===0)showPopup('🏆','HOT STREAK!',`${mathStreak} in a row! You're on fire! 🔥`);
+  }else{
+    btn.classList.add('wrong');document.querySelectorAll('.abtn').forEach(b=>{if(+b.textContent===cor)b.classList.add('correct');});
+    mathStreak=0;updScore('streak',0);
+    document.getElementById('feedback').textContent=`❌ Answer was ${cor}`;
+    document.getElementById('feedback').style.color='#EF233C';
+  }
+  setTimeout(newQuestion,1600);
+}
+
+// ══════════════════════════════════════════════════════
+// WORD SEARCH
+// ══════════════════════════════════════════════════════
+const ALL_WORDS=[
+  {w:'CAT',e:'🐱'},{w:'DOG',e:'🐶'},{w:'SUN',e:'☀️'},{w:'STAR',e:'⭐'},
+  {w:'FISH',e:'🐠'},{w:'TREE',e:'🌳'},{w:'BALL',e:'⚽'},{w:'CAKE',e:'🎂'},
+  {w:'BIRD',e:'🐦'},{w:'RAIN',e:'🌧️'},{w:'BOOK',e:'📚'},{w:'MOON',e:'🌙'},
+  {w:'FROG',e:'🐸'},{w:'BEAR',e:'🐻'},{w:'LION',e:'🦁'},{w:'DUCK',e:'🦆'},
+  {w:'ROSE',e:'🌹'},{w:'SHIP',e:'🚢'},{w:'DRUM',e:'🥁'},{w:'WOLF',e:'🐺'},
+  {w:'CORN',e:'🌽'},{w:'WAVE',e:'🌊'},{w:'FIRE',e:'🔥'},{w:'SNOW',e:'❄️'},
+  {w:'CLOUD',e:'☁️'},{w:'PLANE',e:'✈️'},{w:'HORSE',e:'🐴'},{w:'APPLE',e:'🍎'},
+  {w:'TIGER',e:'🐯'},{w:'CROWN',e:'👑'},{w:'GRAPE',e:'🍇'},{w:'CLOCK',e:'🕐'},
+  {w:'BREAD',e:'🍞'},{w:'SHARK',e:'🦈'},{w:'PIANO',e:'🎹'},{w:'ROBOT',e:'🤖'},
+  {w:'HEART',e:'❤️'},{w:'EARTH',e:'🌍'},{w:'CANDY',e:'🍬'}
+];
+const WS_FC=['#06D6A0','#FF6B9D','#9B5DE5','#FF6B35','#4ECDC4','#FFD93D','#EF233C','#2D9CDB','#27AE60','#F2994A','#E040FB','#00BCD4'];
+const GS=15;let wsG=[],wsP=[],wsFound=new Set(),wsCColors={},wsDrag=false,wsSelStart=null,wsSelCells=[];
+
+function newWordGame(){
+  wsFound=new Set();wsCColors={};wsSelCells=[];wsDrag=false;
+  const chosen=shuffArr(ALL_WORDS).slice(0,16);
+  const {grid,placed}=buildGrid(chosen);wsG=grid;wsP=placed;
+  renderGrid();renderWList();
+}
+function buildGrid(chosen){
+  const grid=Array.from({length:GS},()=>Array(GS).fill(''));const placed=[];
+  const dirs=[[0,1],[1,0],[1,1],[0,-1],[-1,0],[-1,-1],[1,-1],[-1,1]];
+  chosen.forEach(w=>{
+    let ok=false,tries=0;
+    while(!ok&&tries<400){
+      tries++;const dir=dirs[rand(0,7)];const r=rand(0,GS-1),c=rand(0,GS-1);
+      const cells=[];let valid=true;
+      for(let i=0;i<w.w.length;i++){const nr=r+dir[0]*i,nc=c+dir[1]*i;if(nr<0||nr>=GS||nc<0||nc>=GS){valid=false;break;}if(grid[nr][nc]&&grid[nr][nc]!==w.w[i]){valid=false;break;}cells.push([nr,nc]);}
+      if(valid){cells.forEach(([r,c],i)=>grid[r][c]=w.w[i]);placed.push({...w,cells});ok=true;}
+    }
+  });
+  const al='ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+  for(let r=0;r<GS;r++)for(let c=0;c<GS;c++)if(!grid[r][c])grid[r][c]=al[rand(0,25)];
+  return{grid,placed};
+}
+function renderGrid(){
+  const g=document.getElementById('wsgrid');
+  g.style.gridTemplateColumns=`repeat(${GS},30px)`;g.innerHTML='';
+  for(let r=0;r<GS;r++)for(let c=0;c<GS;c++){
+    const el=document.createElement('div');el.className='wc';el.textContent=wsG[r][c];
+    el.dataset.r=r;el.dataset.c=c;
+    const fc=wsCColors[r+'-'+c];if(fc){el.style.background=fc;el.style.color='#fff';}
+    el.addEventListener('mousedown',wsDown);el.addEventListener('mouseover',wsOver);el.addEventListener('mouseup',wsUp);
+    el.addEventListener('touchstart',e=>{e.preventDefault();wsDown(e.touches[0]);},{passive:false});
+    el.addEventListener('touchmove',e=>{e.preventDefault();const t=e.touches[0];wsOver(document.elementFromPoint(t.clientX,t.clientY));},{passive:false});
+    el.addEventListener('touchend',e=>{e.preventDefault();wsUp();},{passive:false});
+    g.appendChild(el);
+  }
+  updWProg();
+}
+function wsCell(r,c){return document.querySelector(`#wsgrid [data-r="${r}"][data-c="${c}"]`);}
+function wsDown(e){wsDrag=true;wsClearSel();if(e.target&&e.target.dataset&&e.target.dataset.r!=null){wsSelStart={r:+e.target.dataset.r,c:+e.target.dataset.c};e.target.classList.add('sel');}}
+function wsOver(e){if(!wsDrag||!e||!e.dataset||e.dataset.r==null)return;wsClearSel();const end={r:+e.dataset.r,c:+e.dataset.c};wsSelCells=wsBetween(wsSelStart,end);wsSelCells.forEach(([r,c])=>{const el=wsCell(r,c);if(el&&!wsCColors[r+'-'+c])el.classList.add('sel');});}
+function wsUp(){if(!wsDrag)return;wsDrag=false;wsCheck();wsClearSel();}
+function wsClearSel(){document.querySelectorAll('#wsgrid .sel').forEach(c=>c.classList.remove('sel'));wsSelCells=[];}
+function wsBetween(s,e){const cells=[];const dr=Math.sign(e.r-s.r),dc=Math.sign(e.c-s.c);let r=s.r,c=s.c;while(true){cells.push([r,c]);if(r===e.r&&c===e.c)break;r+=dr;c+=dc;if(cells.length>GS*2)break;}return cells;}
+function wsCheck(){
+  if(wsSelCells.length<2)return;
+  const sel=wsSelCells.map(([r,c])=>wsG[r][c]).join('');const rev=sel.split('').reverse().join('');
+  wsP.forEach((pw,idx)=>{
+    if(wsFound.has(pw.w))return;
+    if(sel===pw.w||rev===pw.w){
+      wsFound.add(pw.w);updScore('words',1);
+      const color=WS_FC[idx%WS_FC.length];
+      pw.cells.forEach(([r,c])=>{wsCColors[r+'-'+c]=color;const el=wsCell(r,c);if(el){el.style.background=color;el.style.color='#fff';}});
+      const wEl=document.querySelector(`[data-word="${pw.w}"]`);if(wEl)wEl.classList.add('found');
+      updWProg();
+      if(wsFound.size===wsP.length)setTimeout(()=>showPopup('🎉','ALL FOUND!',`You found all ${wsP.length} words! Amazing! 🏆`),300);
+    }
+  });
+}
+function renderWList(){
+  const list=document.getElementById('wlist');list.innerHTML='';
+  wsP.forEach(w=>{const d=document.createElement('div');d.className='witem'+(wsFound.has(w.w)?' found':'');d.dataset.word=w.w;d.innerHTML=`<span>${w.e}</span><span>${w.w}</span>`;list.appendChild(d);});
+  updWProg();
+}
+function updWProg(){document.getElementById('wprog').textContent=`Found: ${wsFound.size} / ${wsP.length}`;}
+
+// ══════════════════════════════════════════════════════
+// DRAWING
+// ══════════════════════════════════════════════════════
+const DRAW_LESSONS=[
+  {id:'boy',name:'👦 Boy',color:'#4ECDC4',trophy:'👦',steps:[
+    {title:'Draw the Head',instruction:'Start with a circle in the upper-centre of your page. This is the boy\'s head! Make it about the size of a large coin.',detail:'Hold your pencil loosely and draw a smooth oval, slightly wider than tall. A slightly wobbly circle is totally fine — real artists never draw perfect circles!',tip:'💡 Lightly sketch first. Draw over it more firmly once you are happy with the shape.',draw:'⭕ Draw a big smooth oval for the head'},
+    {title:'Draw the Eyes',instruction:'Inside the head, draw two medium circles for eyes in the upper half, with a gap between them about as wide as one eye.',detail:'Inside each eye draw a smaller filled circle (the pupil). Leave a tiny white dot in the corner of each pupil — this makes the eyes look alive and shiny! Eyes sit halfway down the face, not near the top.',tip:'💡 Bigger pupils = more surprised. Smaller pupils = more focused!',draw:'👁️ Two circles + filled pupils + a tiny shine dot each'},
+    {title:'Eyebrows & Nose',instruction:'Above each eye, draw a short curved line for the eyebrow. Below the eyes in the centre, draw a small curved line for the nose.',detail:'Happy eyebrows curve upward. Angry eyebrows slant inward toward the nose. Surprised eyebrows go very high! The nose sits exactly halfway between the eyes and the chin.',tip:'💡 Try different eyebrow positions to change the boy\'s expression completely!',draw:'〰️ Curved brows above eyes + small curved nose below'},
+    {title:'Mouth & Ears',instruction:'Draw a big curved smile below the nose. On each side of the head at eye level, draw a small D-shape for the ears.',detail:'The smile should be wide and cheerful — curve it up at both ends. Add a smaller curved line inside the ear to show the inner ear. You can add teeth by drawing a rectangle inside the smile!',tip:'💡 The mouth sits in the lower quarter of the face.',draw:'😊 Wide smile curve + D-shaped ears on each side'},
+    {title:'Draw the Hair',instruction:'On top of the head, draw the hair. Try spiky hair (sharp zigzag points), curly hair (loopy bumps), or a fringe (straight lines across forehead).',detail:'Hair grows from the top of the head and overlaps the head circle. Draw the outer silhouette of the hair first, then add lines inside to show individual strands and texture.',tip:'💡 Hair is drawn OUTSIDE and on top of the head circle — not inside it!',draw:'✏️ Spiky zigzags OR curly bumps on top and sides of head'},
+    {title:'Body & T-Shirt',instruction:'Below the head, draw a rectangle for the body wearing a T-shirt. Add a collar at the top and two sleeve shapes at the sides.',detail:'Inside the T-shirt, add a fun design — stripes, a star, a number, or a logo! Below the shirt, draw a rectangle for shorts or trousers. The body is about twice as tall as the head.',tip:'💡 Add wrinkle lines on the clothing to make it look real and lived-in!',draw:'👕 Rectangle body + collar + sleeves + T-shirt design'},
+    {title:'Arms & Hands',instruction:'From each side of the body, draw two tube-like arms. At the end of each arm, draw an oval hand with small bumps for fingers on top.',detail:'Bend the arm slightly at the elbow to make it look natural. Thumbs stick out to the side. One arm could be waving hello! Keep the arms roughly the same width as the neck.',tip:'💡 Arms hang down to about halfway along the legs when relaxed.',draw:'🤚 Tube arms + oval hands + finger bumps at the top'},
+    {title:'Legs, Feet & Color!',instruction:'Below the shorts, draw two long rectangles for legs. At the bottom of each, draw a shoe — an oval shape with a flat bottom and rounded toe.',detail:'Add shoelaces with a small X pattern and a bow on top. Now COLOR everything! Try different skin tones for the face, bright colors for the clothes, and bold colors for the shoes.',tip:'💡 The legs and feet together are longer than the head and body combined!',draw:'👟 Rectangle legs + oval shoes with laces → THEN COLOR!'},
+  ]},
+  {id:'girl',name:'👧 Girl',color:'#FF6B9D',trophy:'👧',steps:[
+    {title:'Draw the Head',instruction:'Draw a smooth rounded oval for the girl\'s face — slightly more rounded than the boy\'s head.',detail:'Girls\' faces in cartoons tend to be slightly rounder and softer. Sketch gently and adjust until you are happy with the shape.',tip:'💡 Light, gentle pencil strokes give the best oval shape.',draw:'⭕ A smooth rounded oval — softer than the boy\'s'},
+    {title:'Eyes with Lashes',instruction:'Draw two large oval eyes — make them bigger than the boy\'s eyes. Add 3-4 short curved lines at the top of each eye for eyelashes.',detail:'Eyelashes curve upward and outward. Add a shine dot inside each pupil. You can also add a small curved line at the outer corner of each eye for extra expression.',tip:'💡 Bigger, more expressive eyes are the most important feature!',draw:'👁️✨ Large oval eyes + curving upper lashes + shine dots'},
+    {title:'Nose, Cheeks & Smile',instruction:'Add a tiny curved nose. Draw two small circles on the cheeks for rosy cheeks. Then add a big bright smile.',detail:'Rosy cheeks make the face look healthy and happy. They should sit just outside and slightly below the eyes. The smile can show teeth or just be a simple curve.',tip:'💡 Color the cheeks light pink or peach when coloring.',draw:'🌸 Tiny nose + pink cheek circles + a big curved smile'},
+    {title:'Draw Long Hair',instruction:'Draw the girl\'s hair falling down both sides of the head and past the shoulders. Add a fringe (bangs) over the forehead.',detail:'Draw the outer silhouette of the hair first — it should extend well beyond the head on each side and flow downward. Then add lines inside to show hair strands. Add a bow, clips, or a ponytail!',tip:'💡 Hair overlaps and extends beyond the head circle on all sides.',draw:'💇 Long flowing hair on both sides + fringe + add a bow!'},
+    {title:'Body & Dress',instruction:'Below the head, draw a triangle shape that widens toward the bottom — this is a dress! Add a small neckline at the top and two short sleeve triangles.',detail:'Make the dress fancy! Add spots, stripes, flowers, or a bow pattern. A waistline (horizontal line across the middle) makes it look more like a real dress. The skirt flares at the bottom!',tip:'💡 A triangle shape immediately reads as a dress to anyone who sees it!',draw:'👗 Triangle dress + neckline at top + sleeves + fun pattern'},
+    {title:'Arms & Hands',instruction:'Draw two slim arms coming from the sleeve edges. Add small oval hands with tiny finger bumps at the top.',detail:'One hand could hold something — a flower, a magic wand, a book, or a heart! Slightly thinner arms give a softer, more delicate look compared to the boy.',tip:'💡 Arms should reach to about the mid-thigh when hanging naturally.',draw:'🤚 Slim tube arms + small oval hands + finger bumps'},
+    {title:'Legs & Shoes',instruction:'Below the dress hem, draw two slim legs. Add little flat shoes at the bottom — oval shapes with a small heel and rounded toe.',detail:'Add a bow on each shoe, or draw ballet flats, sneakers, or boots. Small detail like laces or straps makes a huge difference. The skirt covers the very top of the legs.',tip:'💡 Girls\' cartoon shoes often have a small rounded heel even when flat.',draw:'👠 Slim legs + cute flat shoes + bows on top'},
+    {title:'Color & Accessories!',instruction:'Color the hair, skin, and dress with your favorite colors! Add patterns, sparkles, or flowers. Give her accessories like earrings or a tiara!',detail:'Try coloring her hair any color — even blue, purple, or rainbow! Real artists invent their own characters. Add a necklace, earrings, a crown, or a wand for a princess look.',tip:'💡 Use lighter shades first, then add darker shading at the edges for depth and glow!',draw:'🎨 Color EVERYTHING → skin, hair, dress → add sparkles + accessories!'},
+  ]},
+  {id:'sun',name:'☀️ Sun',color:'#FFD93D',trophy:'☀️',steps:[
+    {title:'Draw the Sun Body',instruction:'Draw a large circle in the centre of your page. This is the sun\'s body — make it the size of your fist!',detail:'Use smooth, confident strokes. Trace a cup or coin if you want a very round circle. Start at the top and sweep around in one continuous motion.',tip:'💡 A slightly wobbly circle is perfectly fine — it just adds character!',draw:'⭕ One large smooth circle in the centre'},
+    {title:'Add 8 Straight Rays',instruction:'Draw 8 straight lines radiating outward from the circle — like the points of a compass plus diagonals.',detail:'Make the rays about the same length as the radius of the sun circle. Press firmly and confidently for straight lines. Spacing: think of a clock face at 12, 3, 6, 9 o\'clock and then halfway between each.',tip:'💡 A ruler makes very straight, clean rays!',draw:'★ 8 evenly spaced straight lines radiating outward'},
+    {title:'Add Wavy Rays',instruction:'Between each straight ray, draw a shorter wavy or zigzag ray. These give the sun extra sparkle and energy!',detail:'Wavy rays look like little tongues of flame. Zigzag rays look like lightning bolts. You can mix them for a wild, energetic look!',tip:'💡 Make the wavy rays slightly shorter than the straight ones.',draw:'〰️ Wavy or zigzag rays between each straight ray'},
+    {title:'Draw a Happy Face',instruction:'Inside the sun circle, draw two large oval eyes, a round nose, and a wide happy smile. Add rosy cheeks!',detail:'Give the sun a fun personality! Try surprised eyebrows, a cheeky grin, or winking one eye. Add rosy circle cheeks for extra warmth.',tip:'💡 Place the eyes in the upper half of the circle, nose in the middle.',draw:'😊 Two eyes + nose + big wide smile + rosy cheeks'},
+    {title:'Color Your Sun!',instruction:'Color the sun body bright yellow. Use orange for the rays. Add a light blue sky all around it!',detail:'Layer your colors: light yellow first for the body, then orange-yellow for the rays. Press harder on the outer edges of the sun\'s body to create a glowing gradient effect.',tip:'💡 Leave a thin ring of white around the sun against the blue sky to make it glow!',draw:'🎨 Yellow body + orange rays + blue sky background'},
+  ]},
+  {id:'cat',name:'🐱 Cat',color:'#9B5DE5',trophy:'🐱',steps:[
+    {title:'Draw the Head',instruction:'Draw a circle for the cat\'s head — slightly flattened at the bottom for a realistic look.',detail:'Cats have round, full faces that narrow just a little at the chin. Sketch lightly and go over it once you\'re happy.',tip:'💡 The head is slightly wider than tall.',draw:'⭕ Circle, slightly flattened at the bottom'},
+    {title:'Add the Ears',instruction:'Draw two pointed triangles on top of the head, one on each side, tilted slightly outward. Add a smaller pink triangle inside each ear.',detail:'Cat ears are alert and angled outward — NOT perfectly straight up. Place them at roughly the 10 and 2 o\'clock positions on the head.',tip:'💡 The inner ear triangle should be a different color from the outer ear.',draw:'△△ Two pointed ears at 10 and 2 o\'clock + pink inner triangles'},
+    {title:'Draw the Eyes',instruction:'Draw two large almond-shaped eyes in the upper half of the face. Inside each, draw a vertical oval pupil.',detail:'Cat eyes are beautiful! Add a small shine dot in each eye. You can make the pupil very narrow (alert cat) or very wide (playing cat). The eye shape is like an almond or a football.',tip:'💡 The larger the eyes, the cuter and more kitten-like the cat looks!',draw:'😺 Almond-shaped eyes + vertical oval pupils + shine dots'},
+    {title:'Nose, Mouth & Whiskers',instruction:'Draw a tiny upside-down triangle for the nose. Below it, draw a Y-shape for the mouth. Then draw 3 long lines on each side for whiskers.',detail:'Whiskers are one of the best parts! Make them very long — longer than the width of the head on each side. They can curve up slightly at the tips. The Y-shape mouth is what makes it look distinctly like a cat!',tip:'💡 Whiskers should extend far beyond the face — cats use them to sense space!',draw:'🐱 Tiny triangle nose + Y mouth + 3 long whiskers each side'},
+    {title:'Draw the Body',instruction:'Below the head, draw an oval body. Add a long graceful tail sweeping to one side of the body.',detail:'The tail curves elegantly. A fluffy tail has a slightly bumpy or furry edge. A sleek tail is perfectly smooth. Cats often tuck their tail around their front paws when sitting still.',tip:'💡 The body oval is about 1.5x as tall as the head.',draw:'🐈 Oval body + long curved tail sweeping to one side'},
+    {title:'Paws, Fur & Color!',instruction:'Draw small oval front paws with tiny U-shaped toes at the bottom of the body. Color your cat any color you choose!',detail:'Add short curved lines all over the body to suggest fur texture. Orange tabbies have striped markings — draw parallel curved lines across the body. Black cats are solid black. White cats have subtle grey shading.',tip:'💡 Cats can be ANY color — even blue or purple in fantasy art!',draw:'🎨 Small oval paws + fur texture lines + COLORS!'},
+  ]},
+  {id:'rocket',name:'🚀 Rocket',color:'#EF233C',trophy:'🚀',steps:[
+    {title:'Draw the Body',instruction:'Draw a tall, narrow rectangle. Make it about 3-4 times taller than it is wide. This is the rocket\'s main fuselage!',detail:'Rockets are designed to be very aerodynamic — thin and tall to cut through the atmosphere and fly into space efficiently. The width determines the scale of your whole rocket.',tip:'💡 The thinner the body, the faster and more powerful the rocket looks!',draw:'▭ Tall narrow rectangle — 3-4× taller than wide'},
+    {title:'Add the Nose Cone',instruction:'At the very top of the rectangle, draw a sharp pointed triangle for the nose cone.',detail:'A very pointy nose cone looks fast and aerodynamic. A more rounded one looks like a space capsule carrying astronauts. Add a seam line where the cone meets the body.',tip:'💡 The nose cone is where satellites or astronauts sit on real rockets!',draw:'🔺 Sharp triangle on top of the rectangle'},
+    {title:'Draw the Fins',instruction:'At the bottom of the body, draw 2-3 large swept-back triangle fins on each side, angled backward.',detail:'Fins stabilize the rocket like the feathers on an arrow. They MUST be tilted backward — not pointing straight out. Real rockets often have 4 fins, one on each side.',tip:'💡 Angle the fins backward at about 45° from the body sides.',draw:'◁▷ Swept-back triangle fins at the base of the body'},
+    {title:'Windows & Details',instruction:'Draw a round porthole window on the body. Add horizontal lines across the body for panel sections. Draw a flag or mission logo!',detail:'Add a tiny astronaut face looking out the window — so fun! Panel lines make the rocket look technical. Add rivets (small dots along the lines) for a realistic look.',tip:'💡 Real rockets have their country\'s flag painted on the side!',draw:'🔵 Circle window + horizontal panel lines + flag or logo'},
+    {title:'Epic Flames & Space!',instruction:'At the bottom, draw layered wild flame shapes — big orange outer flames, yellow inner flames, and a tiny white hot center!',detail:'Draw the flames jagged and irregular — real fire is never perfectly shaped. Add a scorched glow around the base. Then fill space with stars (dots), planets (circles with rings), and comets (circles with a tail)!',tip:'💡 The flame cone should be wider than the rocket bottom for dramatic effect!',draw:'🔥 Layered flames (orange→yellow→white) + stars + planets!'},
+  ]},
+];
+
+let currentLesson=DRAW_LESSONS[0];let currentStep=0;let drawTrophies=new Set();
+let dTool='pen',dColor='#2D2D2D',dSize=6;
+const PALETTE=['#2D2D2D','#EF233C','#FF6B35','#FFD93D','#06D6A0','#4ECDC4','#9B5DE5','#FF6B9D','#E040FB','#2D9CDB','#8B4513','#FFFFFF'];
+let isDrawing=false,lastPos={x:0,y:0},shapeStart=null,snapshots=[];
+
+function initDraw(){
+  // lesson picker
+  const lp=document.getElementById('lessonpick');lp.innerHTML='';
+  DRAW_LESSONS.forEach(l=>{
+    const b=document.createElement('button');b.className='lpick';b.textContent=l.name+(drawTrophies.has(l.id)?' ✅':'');
+    b.style.borderColor=currentLesson.id===l.id?l.color:'#ddd';
+    b.style.background=currentLesson.id===l.id?l.color:'#f5f5f5';
+    b.style.color=currentLesson.id===l.id?'#fff':'#555';
+    b.onclick=()=>{currentLesson=l;currentStep=0;initDraw();};lp.appendChild(b);
+  });
+  // step bullets
+  const sb=document.getElementById('stepbullets');sb.innerHTML='';
+  currentLesson.steps.forEach((_,i)=>{
+    const b=document.createElement('button');b.className='sbullet';
+    b.textContent=i<currentStep?'✓':i+1;
+    b.style.borderColor=i===currentStep?currentLesson.color:'#ddd';
+    b.style.background=i<currentStep?currentLesson.color:i===currentStep?'#fff':'#f5f5f5';
+    b.style.color=i<currentStep?'#fff':i===currentStep?currentLesson.color:'#aaa';
+    b.onclick=()=>{currentStep=i;renderStepContent();renderStepBullets();};sb.appendChild(b);
+  });
+  renderStepContent();
+  // trophies
+  const dt=document.getElementById('draw-trophies');dt.innerHTML='';
+  DRAW_LESSONS.forEach(l=>{const d=document.createElement('div');d.textContent=l.trophy;d.style.opacity=drawTrophies.has(l.id)?'1':'0.22';d.title=l.name;dt.appendChild(d);});
+  // colors
+  const cd=document.getElementById('colordots');cd.innerHTML='';
+  PALETTE.forEach(c=>{const d=document.createElement('div');d.className='cdot'+(c===dColor?' active':'');d.style.background=c;if(c==='#FFFFFF')d.style.boxShadow='0 0 0 1px #ddd';d.onclick=()=>{dColor=c;document.querySelectorAll('.cdot').forEach(x=>x.classList.remove('active'));d.classList.add('active');};cd.appendChild(d);});
+  // prev/next buttons
+  document.getElementById('prevStep').disabled=currentStep===0;document.getElementById('prevStep').style.background=currentStep===0?'#eee':currentLesson.color;document.getElementById('prevStep').style.color=currentStep===0?'#aaa':'#fff';
+  document.getElementById('nextStep').disabled=currentStep===currentLesson.steps.length-1;document.getElementById('nextStep').style.background=currentStep===currentLesson.steps.length-1?'#eee':currentLesson.color;document.getElementById('nextStep').style.color=currentStep===currentLesson.steps.length-1?'#aaa':'#fff';
+}
+
+function renderStepBullets(){
+  const sb=document.getElementById('stepbullets');sb.innerHTML='';
+  currentLesson.steps.forEach((_,i)=>{
+    const b=document.createElement('button');b.className='sbullet';b.textContent=i<currentStep?'✓':i+1;
+    b.style.borderColor=i===currentStep?currentLesson.color:'#ddd';b.style.background=i<currentStep?currentLesson.color:i===currentStep?'#fff':'#f5f5f5';b.style.color=i<currentStep?'#fff':i===currentStep?currentLesson.color:'#aaa';
+    b.onclick=()=>{currentStep=i;renderStepContent();renderStepBullets();};sb.appendChild(b);
+  });
+}
+
+function renderStepContent(){
+  const s=currentLesson.steps[currentStep];
+  const sc=document.getElementById('stepcontent');
+  sc.innerHTML=`
+    <div class="stepc" style="background:${currentLesson.color}18;border:2px solid ${currentLesson.color}55;">
+      <div style="font-family:'Fredoka One',cursive;color:${currentLesson.color};font-size:.88rem;margin-bottom:4px;">Step ${currentStep+1} of ${currentLesson.steps.length}</div>
+      <div style="font-family:'Fredoka One',cursive;font-size:1.1rem;color:#1A1A2E;margin-bottom:8px;">${s.title}</div>
+      <div class="draw-hint" style="border-color:${currentLesson.color};color:${currentLesson.color};">✏️ ${s.draw}</div>
+      <div style="font-size:.85rem;color:#333;line-height:1.65;margin-bottom:8px;font-weight:700;">${s.instruction}</div>
+      <div style="font-size:.82rem;color:#555;line-height:1.55;margin-bottom:8px;">${s.detail}</div>
+      <div style="font-size:.78rem;color:#9B5DE5;font-weight:700;">${s.tip}</div>
+    </div>`;
+  // update prev/next
+  const p=document.getElementById('prevStep');const n=document.getElementById('nextStep');
+  p.disabled=currentStep===0;p.style.background=currentStep===0?'#eee':currentLesson.color;p.style.color=currentStep===0?'#aaa':'#fff';
+  n.disabled=currentStep===currentLesson.steps.length-1;n.style.background=currentStep===currentLesson.steps.length-1?'#eee':currentLesson.color;n.style.color=currentStep===currentLesson.steps.length-1?'#aaa':'#fff';
+}
+
+function changeStep(d){
+  const ns=currentStep+d;
+  if(ns>=0&&ns<currentLesson.steps.length){currentStep=ns;renderStepContent();renderStepBullets();}
+}
+
+function setDrawTool(t,btn){dTool=t;document.querySelectorAll('.toolbtn').forEach(b=>b.classList.remove('active'));btn.classList.add('active');}
+
+function resizeCanvas(){const cv=document.getElementById('drawCanvas');if(!cv)return;const w=cv.parentElement.clientWidth-20;cv.style.maxWidth=Math.min(500,w)+'px';}
+
+function getPos(e,cv){
+  const r=cv.getBoundingClientRect();const s=cv.width/r.width;
+  const cx=e.touches?e.touches[0].clientX:e.clientX;const cy=e.touches?e.touches[0].clientY:e.clientY;
+  return{x:(cx-r.left)*s,y:(cy-r.top)*s};
+}
+function initCanvas(){
+  const cv=document.getElementById('drawCanvas');const ctx=cv.getContext('2d');
+  ctx.fillStyle='#fff';ctx.fillRect(0,0,cv.width,cv.height);
+  cv.addEventListener('mousedown',e=>{isDrawing=true;const p=getPos(e,cv);lastPos=p;shapeStart=p;if(dTool==='pen'||dTool==='eraser')snapshots.push(ctx.getImageData(0,0,cv.width,cv.height));});
+  cv.addEventListener('mousemove',e=>{if(!isDrawing)return;const p=getPos(e,cv);const t=dTool;if(t==='pen'||t==='eraser'){ctx.beginPath();ctx.moveTo(lastPos.x,lastPos.y);ctx.lineTo(p.x,p.y);ctx.strokeStyle=t==='eraser'?'#fff':dColor;ctx.lineWidth=t==='eraser'?dSize*3:dSize;ctx.lineCap='round';ctx.lineJoin='round';ctx.stroke();lastPos=p;}else if(snapshots.length>0){ctx.putImageData(snapshots[snapshots.length-1],0,0);drawShape(ctx,shapeStart,p);}});
+  cv.addEventListener('mouseup',e=>{if(!isDrawing)return;isDrawing=false;const p=getPos(e,cv);if(dTool!=='pen'&&dTool!=='eraser'){snapshots.push(ctx.getImageData(0,0,cv.width,cv.height));drawShape(ctx,shapeStart,p);}});
+  cv.addEventListener('mouseleave',()=>isDrawing=false);
+  cv.addEventListener('touchstart',e=>{e.preventDefault();isDrawing=true;const p=getPos(e,cv);lastPos=p;shapeStart=p;if(dTool==='pen'||dTool==='eraser')snapshots.push(ctx.getImageData(0,0,cv.width,cv.height));},{passive:false});
+  cv.addEventListener('touchmove',e=>{e.preventDefault();if(!isDrawing)return;const p=getPos(e,cv);const t=dTool;if(t==='pen'||t==='eraser'){ctx.beginPath();ctx.moveTo(lastPos.x,lastPos.y);ctx.lineTo(p.x,p.y);ctx.strokeStyle=t==='eraser'?'#fff':dColor;ctx.lineWidth=t==='eraser'?dSize*3:dSize;ctx.lineCap='round';ctx.lineJoin='round';ctx.stroke();lastPos=p;}else if(snapshots.length>0){ctx.putImageData(snapshots[snapshots.length-1],0,0);drawShape(ctx,shapeStart,p);}},{passive:false});
+  cv.addEventListener('touchend',e=>{isDrawing=false;const p=getPos(e,cv);if(dTool!=='pen'&&dTool!=='eraser'){snapshots.push(ctx.getImageData(0,0,cv.width,cv.height));drawShape(ctx,shapeStart,p);}});
+  document.getElementById('bsize').addEventListener('input',e=>{dSize=+e.target.value;document.getElementById('bsizedisp').textContent=dSize+'px';});
+}
+function drawShape(ctx,s,e){
+  ctx.beginPath();ctx.strokeStyle=dColor;ctx.lineWidth=dSize;ctx.lineCap='round';
+  if(dTool==='line'){ctx.moveTo(s.x,s.y);ctx.lineTo(e.x,e.y);ctx.stroke();}
+  else if(dTool==='circle'){const rx=(e.x-s.x)/2,ry=(e.y-s.y)/2;ctx.ellipse(s.x+rx,s.y+ry,Math.abs(rx),Math.abs(ry),0,0,2*Math.PI);ctx.stroke();}
+  else if(dTool==='rect'){ctx.strokeRect(s.x,s.y,e.x-s.x,e.y-s.y);}
+}
+function undoDraw(){const cv=document.getElementById('drawCanvas');const ctx=cv.getContext('2d');if(snapshots.length>0)ctx.putImageData(snapshots.pop(),0,0);else{ctx.fillStyle='#fff';ctx.fillRect(0,0,cv.width,cv.height);}}
+function clearCanvas(){const cv=document.getElementById('drawCanvas');const ctx=cv.getContext('2d');ctx.fillStyle='#fff';ctx.fillRect(0,0,cv.width,cv.height);snapshots=[];}
+function saveArt(){
+  const cv=document.getElementById('drawCanvas');const a=document.createElement('a');a.download='my-drawing.png';a.href=cv.toDataURL();a.click();
+  if(!drawTrophies.has(currentLesson.id)){drawTrophies.add(currentLesson.id);updScore('art',1);initDraw();showPopup('🎨','Art Saved!','Trophy earned for '+currentLesson.name+'! 🏆');}
+}
+
+// ══════════════════════════════════════════════════════
+// NOVELS
+// ══════════════════════════════════════════════════════
+const NOVELS=[
+  {id:1,title:"Charlie and the Chocolate Factory",author:"Roald Dahl",emoji:"🍫",cover:"#8B4513",
+   chars:[{n:"Charlie Bucket",e:"👦",d:"A kind, honest boy from a very poor family who wins a golden ticket to the magical factory."},
+          {n:"Willy Wonka",e:"🎩",d:"The mysterious, eccentric genius who owns the most magical chocolate factory in the world."},
+          {n:"Augustus Gloop",e:"🍰",d:"A greedy boy who loves eating chocolate more than anything else — and falls into the river!"},
+          {n:"Violet Beauregarde",e:"🫐",d:"A champion gum-chewer who tries the experimental three-course dinner chewing gum."}],
+   summary:"Poor Charlie Bucket finds a golden ticket inside a chocolate bar, winning a tour of Wonka's incredible factory. One by one, the greedy children meet their fates — but Charlie's goodness earns him the greatest prize of all.",
+   pages:["🎫 CHAPTER ONE\n\nCharlie Bucket lived in a tiny house with his mother, father, and all four grandparents crammed into two beds. They were very poor. For his birthday, Charlie always received one single chocolate bar — and he would make it last a whole month, taking the tiniest nibble each day.\n\nOne winter, news swept around the world: Willy Wonka was hiding FIVE GOLDEN TICKETS inside five of his chocolate bars! The five lucky children who found them would win a full day inside the most magical chocolate factory on Earth!",
+           "🍫 CHAPTER TWO\n\nThe hunt for golden tickets drove the whole world crazy! Rich children bought hundreds of bars. One by one, the tickets were found: Augustus Gloop (first), Violet Beauregarde (second), Veruca Salt (third), Mike Teavee (fourth).\n\nCharlie had only one bar. He unwrapped it slowly... just chocolate. No ticket. Then he found a coin in the snow and bought one more bar. He opened it — and there, gleaming and shining, was THE FIFTH GOLDEN TICKET. Charlie ran home so fast he thought his heart would burst.",
+           "🏭 CHAPTER THREE\n\nInside the factory was the most extraordinary room any of them had ever seen — a vast indoor landscape made entirely of CHOCOLATE! Chocolate waterfalls crashing into chocolate rivers! Edible grass! Lollipop flowers!\n\n'Everything in this room is edible!' announced Willy Wonka. 'The grass, the flowers, the trees — eat as much as you wish!' Augustus Gloop leaned over the chocolate river to drink directly from it... and fell in. He was sucked up a pipe. And that was the end of Augustus.",
+           "🎊 CHAPTER FOUR\n\nOne by one, the children's own bad habits were their undoing. Violet chewed the experimental three-course dinner gum and turned into a giant blueberry. Veruca Salt was judged a 'bad nut' by the nut-sorters and fell down the garbage chute. Mike Teavee was miniaturized by the chocolate television machine.\n\nBut Charlie behaved perfectly. He listened, marveled, and was grateful for every wonder he saw. At the end of the tour, Willy Wonka turned to Charlie with a twinkle in his eye. 'I've been looking for a good child to give my factory to. And I've found one.'"]},
+  {id:2,title:"Alice in Wonderland",author:"Lewis Carroll",emoji:"🐇",cover:"#6A0DAD",
+   chars:[{n:"Alice",e:"👧",d:"A curious, brave, and clever girl who follows a rabbit down a hole into impossible magic."},
+          {n:"White Rabbit",e:"🐇",d:"The nervous rabbit who is always late and who leads Alice into Wonderland."},
+          {n:"The Queen of Hearts",e:"👑",d:"The terrifying ruler who shouts 'Off with their heads!' at everything."},
+          {n:"Cheshire Cat",e:"😺",d:"A mysterious cat who can disappear completely, leaving only his grin behind."}],
+   summary:"Alice follows a White Rabbit down a rabbit hole and tumbles into Wonderland — a world where nothing makes sense. She meets talking animals, a Mad Hatter, a terrifying Queen, and a cat who vanishes into thin air.",
+   pages:["🌸 CHAPTER ONE\n\nAlice was sitting with her sister by the riverbank, feeling very bored, when a White Rabbit with pink eyes ran past her, muttering: 'Oh dear! Oh dear! I shall be too late!' and took a watch from its waistcoat pocket.\n\nAlice, burning with curiosity, followed it — and tumbled down a rabbit hole that seemed to have no bottom. She fell past shelves and jam jars and pictures and maps until she landed with a soft thump at the bottom.\n\nShe found herself in a long hall with many locked doors. A tiny bottle said DRINK ME — she drank it and shrank to ten centimetres tall!",
+           "🍄 CHAPTER TWO\n\nAlice grew and shrank several times more before she managed to get through the tiny door. She met the Caterpillar sitting on a mushroom, asking 'WHO ARE YOU?' rather rudely. One side of the mushroom made her grow, the other made her shrink.\n\nThen she came to a house where a Duchess's baby was turning into a pig, and met the Cheshire Cat sitting in a tree. 'We're all mad here,' said the Cat with its enormous grin. 'I'm mad. You're mad.' 'How do you know I'm mad?' asked Alice. 'You must be,' said the Cat, 'or you wouldn't have come here.'",
+           "🫖 CHAPTER THREE\n\nAlice arrived at the maddest tea party imaginable. The March Hare, the Mad Hatter, and a very sleepy Dormouse were crammed into one corner of an enormous table. 'No room! No room!' they cried — though there were plenty of empty seats.\n\n'It is ALWAYS six o'clock here,' the Hatter explained. 'Time stopped, so we have been having tea forever and ever.' They asked Alice a riddle: 'Why is a raven like a writing desk?' Nobody knew the answer. Not even the Hatter.",
+           "❤️ CHAPTER FOUR\n\nAt the Queen of Hearts' croquet ground, players used flamingos as mallets and hedgehogs as balls. 'OFF WITH THEIR HEADS!' screamed the Queen at everything and everyone.\n\nAlice was put on trial for... nothing very specific. She stood up bravely. 'You're nothing but a pack of cards!' she cried. The whole court rose up into the air and flew at her — and she woke up on the riverbank beside her sister. It had all been a dream. The most wonderful, impossible, perfectly mad dream."]},
+  {id:3,title:"The Lion, the Witch and the Wardrobe",author:"C.S. Lewis",emoji:"🦁",cover:"#1A6B3A",
+   chars:[{n:"Lucy Pevensie",e:"👧",d:"The youngest child and the first to discover the magical world of Narnia inside the wardrobe."},
+          {n:"Aslan",e:"🦁",d:"The great and wise lion — noble, powerful, and good. The true king of Narnia."},
+          {n:"The White Witch",e:"🧙",d:"The evil queen who has cursed Narnia with eternal winter but never Christmas."},
+          {n:"Edmund Pevensie",e:"👦",d:"Lucy's brother who is tricked by the White Witch with enchanted Turkish Delight."}],
+   summary:"Lucy discovers that the wardrobe in the Professor's house leads to Narnia — a land of eternal snow. With her brothers and sister and the great lion Aslan, she must help break the evil White Witch's spell.",
+   pages:["🗄️ CHAPTER ONE\n\nFour children — Peter, Susan, Edmund, and Lucy — were sent to stay at a large old house during the war. Exploring one rainy day, Lucy climbed into a wardrobe in an empty room. She pushed through the coats... and felt branches. Cold. Snow.\n\nShe had stepped into another world called Narnia, where a lamp post glowed in a snowy forest. She met a Faun named Mr Tumnus who told her that Narnia was under the terrible power of the White Witch — a queen who had made it always winter and never Christmas for a hundred years.",
+           "🍬 CHAPTER TWO\n\nEdmund followed Lucy into Narnia and met the White Witch herself, riding a golden sledge. She gave him magical Turkish Delight that made him want more and more and more. She promised him a whole room full of it — if he would bring his brother and sisters to her castle.\n\nWhen all four children finally came to Narnia together, they heard the most exciting news: ASLAN IS ON THE MOVE. Just the sound of that name filled them with joy and courage — all except Edmund, who was already in the Witch's trap.",
+           "🦁 CHAPTER THREE\n\nThey met Aslan — a great, golden, magnificent lion. He was not safe, but he was GOOD. The Witch appeared to claim Edmund as a traitor. 'Every traitor belongs to me by the Deep Magic,' she said coldly. But Aslan whispered something to the Witch alone, and she agreed to give up her claim.\n\nThat night, Lucy and Susan followed Aslan to the Stone Table. The Witch killed the great lion. The girls wept. But at dawn the Stone Table cracked with a thunderous sound — and Aslan was alive! 'There is a Deeper Magic,' he roared, 'from before the dawn of time!'",
+           "🌸 CHAPTER FOUR\n\nAslan breathed on all the stone statues in the Witch's courtyard — and they came back to life, rushing forward with a roar! They swept to the battle. The Witch fought fiercely, turning creatures to stone — but Aslan pounced on her at last, and it was over.\n\nSpring burst across Narnia for the first time in a hundred years. Flowers exploded through the snow. The four children were crowned Kings and Queens at Cair Paravel and reigned for many wonderful years — until one day they found the lamp post again, and tumbled back through the wardrobe. They were children once more."]},
+  {id:4,title:"Matilda",author:"Roald Dahl",emoji:"📚",cover:"#C70039",
+   chars:[{n:"Matilda",e:"👧",d:"A genius five-year-old with magical telekinetic powers who loves books and learning more than anything."},
+          {n:"Miss Honey",e:"🍯",d:"The kind, gentle teacher who recognizes Matilda's extraordinary gifts and truly cares for her."},
+          {n:"Miss Trunchbull",e:"💪",d:"The terrifying headmistress who hates children and is known to throw them by their hair."},
+          {n:"Mr Wormwood",e:"🚗",d:"Matilda's awful father who sells dodgy cars and thinks books are a complete waste of time."}],
+   summary:"Brilliant Matilda teaches herself to read at three and loves books deeply. Stuck with horrible parents and a monstrous headmistress, she discovers she has telekinetic powers — and uses them to fight back!",
+   pages:["📖 CHAPTER ONE\n\nBy the time Matilda was three, she had taught herself to read. By five, she had read every book in the local library. Her parents — Mr and Mrs Wormwood — thought she was a nuisance. 'Books are a waste of time!' bellowed her father. 'Watch the telly!'\n\nThey ignored her gifts completely. So Matilda invented punishments for them. When her father cheated a car buyer, she put bleach in his hair dye — turning it a violent shade of silver-blond. When she was sent to her room, she simply read more wonderful books and was perfectly happy.",
+           "⚡ CHAPTER TWO\n\nAt school, Matilda's teacher was the lovely Miss Honey, who recognized immediately that Matilda was extraordinary. 'This child is reading adult novels and doing advanced mathematics,' she told the headmistress, Miss Trunchbull.\n\nMiss Trunchbull was the most terrifying human being Matilda had ever encountered. She had been a champion hammer-thrower and she treated children in a similar fashion. She kept a horrible cupboard called the Chokey — tiny, dark, with nails on the walls. 'I cannot abide small children!' she roared regularly.",
+           "✨ CHAPTER THREE\n\nOne day in class, glaring at Miss Trunchbull in helpless fury, Matilda felt something extraordinary happen behind her eyes. The glass of water on the teacher's desk tipped over — all by itself. She could move things WITH HER EYES!\n\nMatilda practiced every night until she could do it perfectly and with precision. She also discovered a terrible secret: Miss Trunchbull had stolen Miss Honey's house, Miss Honey's furniture, and Miss Honey's money — and the poor teacher was living in a tiny rented shed, barely able to eat.",
+           "🎉 CHAPTER FOUR\n\nDuring a lesson, Matilda concentrated with every cell of her extraordinary brain. She picked up a piece of chalk telekinetically and wrote on the blackboard in the Trunchbull's absent sister's handwriting: 'AGATHA... THIS IS MAGNUS... GIVE MY JENNY HER HOUSE AND MONEY BACK.'\n\nMiss Trunchbull screamed, fainted, and was carried out. She left the village that very day and was never seen again. Miss Honey got her house and her inheritance back. Matilda's powers faded — she had used all that surplus brain energy simply growing up. But she had Miss Honey, and that was everything."]},
+  {id:5,title:"Harry Potter and the Philosopher's Stone",author:"J.K. Rowling",emoji:"⚡",cover:"#3D0C82",
+   chars:[{n:"Harry Potter",e:"⚡",d:"The boy who lived — a famous wizard who didn't know he was magical until his 11th birthday."},
+          {n:"Hermione Granger",e:"📚",d:"The cleverest witch in Harry's year — bossy at first, but becomes one of his closest friends."},
+          {n:"Ron Weasley",e:"♟️",d:"Harry's loyal, funny best friend from a large family of wizards."},
+          {n:"Albus Dumbledore",e:"🧙",d:"The wise, kind, and enormously powerful headmaster of Hogwarts School of Witchcraft and Wizardry."}],
+   summary:"Harry Potter discovers on his 11th birthday that he is a wizard. He enters the world of Hogwarts, makes friends, learns magic — and uncovers a terrifying secret about the dark wizard who killed his parents.",
+   pages:["🏠 CHAPTER ONE\n\nHarry Potter had never had a birthday party. He lived in the cupboard under the stairs at Number Four, Privet Drive, with his awful Aunt Petunia and Uncle Vernon, who treated him like a servant while their son Dudley got everything.\n\nThen strange things began happening. Hundreds of letters arrived for Harry — hundreds of them. Uncle Vernon burned them all. But on Harry's eleventh birthday, a giant named Rubeus Hagrid broke down the door, sat on the sofa (which collapsed), and said calmly: 'Harry. Yer a wizard.'",
+           "🏰 CHAPTER TWO\n\nHagrid took Harry to Diagon Alley — a hidden magical shopping street — where Harry bought his wand (eleven inches, holly, phoenix feather core), his robes, his books, and a beautiful snowy white owl he named Hedwig.\n\nHe boarded the Hogwarts Express from Platform Nine and Three-Quarters — you had to run at the barrier to get there. At Hogwarts, the magical Sorting Hat was placed on each student's head. 'GRYFFINDOR!' it shouted for Harry. He met Ronald Weasley on the train and Hermione Granger in the corridors. He had real friends for the first time.",
+           "🪄 CHAPTER THREE\n\nHarry, Ron and Hermione became best friends — partly by accident when they fought a mountain troll together on Halloween night. Harry also discovered he was a natural at Quidditch, the magical flying broomstick sport.\n\nThey uncovered something strange: a trapdoor on the third floor, guarded by a three-headed dog. Below it was hidden the Philosopher's Stone — an object of enormous power that could make someone immortal. Someone was trying to steal it. And someone had been trying to kill Harry since his very first Quidditch match.",
+           "🔮 CHAPTER FOUR\n\nHarry descended through the trapdoor with his friends to protect the Stone. He passed through a giant living chess set (Ron was a knight — 'Go on,' he said bravely as he was knocked from his square), survived enchanted flying keys, and solved a logic puzzle.\n\nAlone in the final chamber, Harry found the Stone — and the true villain. Not Snape, as they had suspected, but Professor Quirrell — and on the back of his turban lived Lord Voldemort himself. Harry touched Quirrell and his skin burned to ash — his mother's sacrificial love protected him. He woke in the hospital wing. He had survived, again."]},
+  {id:6,title:"The BFG",author:"Roald Dahl",emoji:"👣",cover:"#007B8A",
+   chars:[{n:"Sophie",e:"👧",d:"A brave, clever orphan girl who is snatched from her bed by the BFG one night."},
+          {n:"The BFG",e:"👂",d:"The Big Friendly Giant — the only giant who doesn't eat children. He catches and delivers dreams."},
+          {n:"The Queen of England",e:"👑",d:"The Queen who believes Sophie and the BFG and helps them stop the nine man-eating giants."},
+          {n:"The Nine Giants",e:"🦴",d:"Nine enormous, horrible giants who gobble up human beings every night while they sleep."}],
+   summary:"Little orphan Sophie is snatched from her bed by a giant — but this giant is friendly! The BFG catches dreams and delivers them to sleeping children. Together they plan to stop nine terrible man-eating giants.",
+   pages:["🌙 CHAPTER ONE\n\nSophie could not sleep. At the witching hour — three o'clock in the morning — she peeked out of the dormitory window at the dark, silent street below. And then she saw it. An enormous shadowy figure moving through the darkness, carrying a huge suitcase and a long trumpet-like object.\n\nThe giant looked up and saw Sophie at the window. In a flash, it reached in, scooped her up in her blanket, and ran — impossibly, silently fast — out of London, across the sea, and far away to a distant, desolate place called Giant Country.",
+           "🫧 CHAPTER TWO\n\n'Please don't eat me!' whispered Sophie. The giant let out a booming laugh. 'Eating human beans? Disgusting! I is the BFG — the Big Friendly Giant! I is only eating snozzcumbers — the most disgusterous vegetable in the whole world. Phizz-whizzing horrible, they is.'\n\nHe showed Sophie his cave, filled with thousands of glowing glass bottles — each containing a dream he had caught with his enormous butterfly net. 'I is catching dreams every night,' he told her, 'and I is blowing the nice ones into children's bedrooms with my long trumpet.'",
+           "👑 CHAPTER THREE\n\nSophie discovered that nine other giants went out every night to different countries to gobble up sleeping human beings. She and the BFG hatched an extraordinary plan: the BFG would create a very specific dream about giants eating people, and blow it directly into the Queen of England's bedroom.\n\nThe Queen woke up, looked out of her window in amazement — and found tiny Sophie sitting on her window ledge! 'Your Majesty,' said Sophie politely, 'what I'm about to tell you will sound completely impossible. But every word is true.'",
+           "🎉 CHAPTER FOUR\n\nThe Queen believed them. She called the Head of the Army and the Head of the Air Force. Helicopters flew to Giant Country. The nine sleeping giants were captured — tied up with enormous steel cables, lifted by helicopter, and transported to England, where a deep pit had been specially dug.\n\nThe BFG was given a beautiful house next to the palace. No more snozzcumbers! He had proper food for the first time in his life. Sophie was given a little cottage next door. The BFG began to write his own story. And that story — the one you have just been reading — is the very book he wrote."]},
+  {id:7,title:"The Jungle Book",author:"Rudyard Kipling",emoji:"🐆",cover:"#2D6A2D",
+   chars:[{n:"Mowgli",e:"🧒",d:"A human boy raised by wolves in the jungles of India — brave, clever, and belonging to two worlds."},
+          {n:"Baloo",e:"🐻",d:"A big, gentle, very fluffy brown bear who teaches Mowgli the Laws of the Jungle."},
+          {n:"Bagheera",e:"🐆",d:"A sleek, intelligent black panther who protects Mowgli with fierce and quiet loyalty."},
+          {n:"Shere Khan",e:"🐯",d:"The mighty, arrogant tiger who hates all humans and wants to kill Mowgli above everything."}],
+   summary:"The man-cub Mowgli is raised by wolves in India and learns the ways of the jungle from Baloo and Bagheera. But the deadly tiger Shere Khan always hunts him. Mowgli must use cleverness and courage to survive.",
+   pages:["🌴 CHAPTER ONE\n\nA tiger named Shere Khan — who hunted men because a lame leg made hunting animals too difficult — frightened a woodcutter's family in the jungle one night, scattering them in the darkness. In the confusion, a tiny baby crawled away unnoticed and found his way into the den of a wolf pack.\n\nShere Khan demanded the baby. Mother Wolf refused. 'The man-cub is mine!' she said, and no wolf dared challenge her. The pack voted to accept Mowgli as one of their own. Baloo the bear spoke for him. Bagheera the black panther paid for his life with a freshly killed bull. Mowgli was safe — for now.",
+           "📜 CHAPTER TWO\n\nMowgli grew up in the jungle, learning everything. Baloo taught him the Master Words — the passwords of the jungle that gave safe passage from every animal. 'We be of one blood, ye and I' — speak these words, and no creature will harm you.\n\nMowgli was the cleverest, most curious student Baloo had ever taught. He learned the speech of every creature — snake and bear, eagle and panther. He wrestled with the wolf-cubs, swam the great rivers, and climbed the highest trees. But always, lurking at the edge of the jungle, Shere Khan waited and watched and hated.",
+           "🐍 CHAPTER THREE\n\nMowgli was seized by the Bandar-log — the Monkey People, who had no law and no leader and thought themselves very important indeed. They dragged him through the treetops to the ruined city of the Cold Lairs.\n\nBaloo and Bagheera followed in fury, calling on Kaa the great Rock Python for help. Kaa's hunting dance was unlike anything in the jungle — all the monkeys swayed helplessly, unable to move or look away. Mowgli pulled Baloo and Bagheera aside just in time. Nobody ever spoke of what happened to the Bandar-log that night.",
+           "🔥 CHAPTER FOUR\n\nShere Khan whispered poison into the ears of the wolf pack, calling Mowgli a man-thing who had no right to run with wolves. The pack growled and would not meet Mowgli's eyes. He understood.\n\n'I am going,' said Mowgli quietly. 'But I will not go without a gift.' He ran to a human village and returned with fire — the Red Flower that all animals fear. He thrust blazing branches into Shere Khan's face and into the faces of the wolves who had turned against him, and they fled howling into the darkness.\n\nMowgli went to live among humans. He learned to be one of them. But the jungle was always in his blood."]},
+  {id:8,title:"Peter Pan",author:"J.M. Barrie",emoji:"🧚",cover:"#1565C0",
+   chars:[{n:"Peter Pan",e:"🧚",d:"The boy who never grows up. He lives in Neverland, can fly, and is both brave and heartbreakingly forgetful."},
+          {n:"Wendy Darling",e:"👧",d:"A kind, imaginative girl who becomes a mother figure to the Lost Boys and understands what Peter cannot."},
+          {n:"Captain Hook",e:"🪝",d:"The brilliant, theatrical villain — a pirate captain with a hook for a hand, terrified of a ticking crocodile."},
+          {n:"Tinker Bell",e:"✨",d:"Peter's tiny golden fairy companion — loyal, brave, and fiercely jealous of anyone who captures Peter's attention."}],
+   summary:"Peter Pan flies into the Darling children's nursery and takes them to Neverland — where children never grow up, mermaids swim in lagoons, and the terrible Captain Hook plots revenge. But Neverland holds a deep sadness beneath its magic.",
+   pages:["🌟 CHAPTER ONE\n\nMrs Darling first heard of Peter Pan while tidying her children's minds at night — as all mothers do in the Barrie household. She found a strange boy's name among her children's thoughts.\n\nThen one night she found muddy footprints on the nursery floor and a tiny glowing fairy named Tinker Bell trapped behind the curtains. Peter had come to collect his shadow, which had come unstuck. Wendy very kindly sewed it back on for him. Peter was so pleased that he asked Wendy to come with him to Neverland to be mother to his gang of Lost Boys.",
+           "✈️ CHAPTER TWO\n\n'Think of something wonderful,' Peter told the children. 'Happy thoughts!' And up they rose — all three of them floating, then flying, out the nursery window into the London night.\n\nThey flew over rooftops, out over the dark sea, following the second star to the right and straight on till morning. Neverland was everything they had ever imagined — underground homes for the Lost Boys, a turquoise lagoon with real mermaids, a forest full of mystery. But Captain Hook and his pirates haunted the island, and Hook hated Peter more than he hated anything in all the world.",
+           "🪝 CHAPTER THREE\n\nHook captured Tiger Lily — the proud Indian princess — and left her on a rock to drown with the rising tide. Peter, perfectly imitating Hook's voice, tricked the pirates into releasing her. Tiger Lily declared Peter the greatest warrior she had ever known.\n\nBut Hook grew cunning. He discovered the secret underground home of the Lost Boys. He placed a poisoned cake outside — but the boys never ate anything that Wendy hadn't prepared herself. Hook captured all the children instead, taking them to his ship. He planned to make them walk the plank into the jaws of the waiting sea.",
+           "🎉 CHAPTER FOUR\n\nPeter woke alone to find everyone gone. Tinker Bell told him what had happened — and then drank the poison Hook had left for Peter! Her light dimmed. 'Do you believe in fairies?' Peter cried out into the world. 'If you believe, CLAP YOUR HANDS!' And Tinker Bell blazed back to golden life.\n\nPeter stormed the pirate ship. In a tremendous battle, Hook leapt at Peter one last time — but Peter stepped aside, and Hook fell into the jaws of the crocodile that had been waiting for him so patiently. The children flew home. But Peter came back, year after year, to take Wendy's daughter — and then her granddaughter — back to Neverland. Always young. Always flying. Always, heartbreakingly, forgetting."]},
+  {id:9,title:"The Wizard of Oz",author:"L. Frank Baum",emoji:"🌪️",cover:"#B8860B",
+   chars:[{n:"Dorothy",e:"👧",d:"A brave, kind, resourceful girl from Kansas who is swept away by a tornado to the magical Land of Oz."},
+          {n:"Scarecrow",e:"🌾",d:"Dorothy's friend who wants a brain — but comes up with the best ideas of anyone."},
+          {n:"Tin Man",e:"🤖",d:"The Tin Man who wants a heart — but is the most caring and sensitive member of their group."},
+          {n:"The Cowardly Lion",e:"🦁",d:"A lion who desperately wants courage — but protects his friends at every turn."}],
+   summary:"Dorothy is swept to the magical Land of Oz by a tornado. She must follow the Yellow Brick Road to meet the Wizard. Along the way she gathers companions who each discover that what they seek they already possess.",
+   pages:["🌪️ CHAPTER ONE\n\nThe Kansas prairie was grey and flat, and the house was grey, and Dorothy's life was grey — except for Dorothy herself, whose eyes were bright and whose laugh was real. Then one day a cyclone struck.\n\nIt picked up the house, with Dorothy and her dog Toto inside, and whirled it round and round for what seemed like hours. When it landed with a tremendous bump and Dorothy opened the door, she gasped. Everything was brilliant, vivid, impossible color. Flowers of every shade! A sky of deep blue! And there, crushed completely flat under the corner of the house, were two silver shoes. Dorothy had accidentally killed the Wicked Witch of the East.",
+           "🟡 CHAPTER TWO\n\nThe Good Witch of the North appeared in a bubble and gave Dorothy the silver shoes — which were more magical than anyone yet knew. 'Follow the Yellow Brick Road to the Emerald City,' she said. 'The great Wizard of Oz can help you return home.'\n\nOn the road, Dorothy met a Scarecrow who wanted a brain (though he always had the best ideas), a Tin Man who wanted a heart (though he wept with feeling at everything), and a Cowardly Lion who wanted courage (though he faced every single danger for his friends). Together they walked the Yellow Brick Road.",
+           "💎 CHAPTER THREE\n\nThe Wicked Witch of the West sent wolves, then crows, then bees to destroy them. She sent her winged monkeys who seized Dorothy and carried her to the witch's castle. 'Give me those shoes!' the Witch screamed.\n\n'No!' said Dorothy firmly. When the Witch finally tried to snatch them by force, her hand burned — a hidden magic was protecting the shoes. When she threatened Toto, Dorothy grabbed a bucket of water and threw it. The Witch shrieked, shrank, and dissolved into a wet heap. 'You've melted her!' cried the winged monkeys. They were finally free.",
+           "🏠 CHAPTER FOUR\n\nThe great Wizard of Oz, at last revealed, was simply a small, ordinary man hiding behind an elaborate screen of lights and curtains and a great booming voice. A humbug. But a kind one.\n\nHe showed the Scarecrow, Tin Man and Lion that they had always had brains, heart and courage — they had been demonstrating these things all along the journey. Dorothy clicked her silver heels together three times and said the words: 'There's no place like home.' She woke in her own bed in Kansas, with Auntie Em beside her. The grey prairie had never looked so beautiful."]},
+  {id:10,title:"The Secret Garden",author:"Frances Hodgson Burnett",emoji:"🌷",cover:"#4A7C40",
+   chars:[{n:"Mary Lennox",e:"👧",d:"A sour, unloved girl who arrives at a mysterious manor and is slowly transformed by a garden's magic."},
+          {n:"Dickon",e:"🐿️",d:"A warm Yorkshire boy who can charm animals and makes everything grow with his gentle touch."},
+          {n:"Colin Craven",e:"👦",d:"A sickly boy shut away in his room, convinced he is dying, who has never once been outside."},
+          {n:"Archibald Craven",e:"👨",d:"Colin's sad, wandering father who locked up the garden when his wife died inside it long ago."}],
+   summary:"The difficult, unloved Mary Lennox discovers a hidden locked garden and a secret bedridden cousin. As she tends the garden back to life, its magic slowly heals everyone — Mary, Colin, and even Colin's sad father.",
+   pages:["🗝️ CHAPTER ONE\n\nMary Lennox was the most contrary, disagreeable child in the whole of India. When her parents died of cholera and she was shipped to England to live with her reclusive uncle at Misselthwaite Manor, she arrived thin, yellow, and thoroughly unpleasant.\n\nThe manor was vast and strange, with a hundred rooms and long cold corridors. Outside, the Yorkshire moors stretched endlessly. A cheerful maid named Martha told Mary about a garden that had been locked and left untouched for ten years — locked by Mr Craven himself after his wife died inside it. Mary felt a strange, unfamiliar feeling: she desperately wanted to find it.",
+           "🌱 CHAPTER TWO\n\nA friendly robin redbreast showed Mary where a key lay buried in the earth. Then the door — hidden entirely behind a curtain of ivy. Mary stepped into a walled garden gone completely wild. Bare brown earth, tangled rose canes, everything grey and sleeping.\n\n'I will make it live again,' she whispered. She began to dig and weed every day in secret. She met Dickon — a wild, gentle Yorkshire boy who could make foxes sit beside him and birds land on his shoulders. He brought seeds and bulbs and tools. And something remarkable began to happen to Mary: she started becoming a different person.",
+           "🌿 CHAPTER THREE\n\nMary heard sobbing late one night and followed it through the dark corridors of the manor to a hidden room. Inside, in an enormous bed hung with silk curtains, lay a boy. He was pale, thin, and absolutely convinced he was going to die.\n\nHis name was Colin Craven. He had never been told he was strong. He had never been taken outside. He was afraid of fresh air and of living. 'I've found the secret garden,' Mary told him. 'I'll take you there.' He didn't believe her. But she told him about Dickon and the robin and the crocuses pushing through the soil, and for the first time in years, Colin wanted something.",
+           "🌸 CHAPTER FOUR\n\nThe day Colin was carried out to the garden in his wheelchair, he sat very still and stared at the green things growing all around him. Something stirred in his chest — something he had no word for yet. Over the weeks that followed, he stood up. Then he walked. Then he ran.\n\nHe called it Magic — the Magic of growing things and sunlight and the good earth. He practiced it every day like a science. And far away, Mr Craven dreamed of his wife's voice calling him home. He rushed back to Misselthwaite — and found Colin running toward him across the garden, laughing, strong, and completely, wonderfully alive."]},
+];
+
+let novReadSet=new Set();
+let novCurrentId=null;
+let novCurrentPage=0;
+let novView='library'; // library | book | read
+
+function renderNovels(){
+  const el=document.getElementById('novels-inner');
+  if(novView==='library'){
+    let html=`<div class="card novels-card">
+      <div class="ff" style="font-size:1.6rem;color:#9B5DE5;margin-bottom:4px;">📚 Children's Story Library!</div>
+      <div style="color:#777;font-weight:600;font-size:.88rem;margin-bottom:16px;">Choose a classic novel — read the story and meet the characters! 📖</div>
+      <div class="novgrid">`;
+    NOVELS.forEach(n=>{
+      html+=`<div class="novitem${novReadSet.has(n.id)?' read-done':''}" style="background:linear-gradient(135deg,${n.cover},${n.cover}bb);" onclick="openBook(${n.id})">
+        <div style="font-size:2.8rem;margin-bottom:8px;">${n.emoji}</div>
+        <div class="ff" style="font-size:.85rem;line-height:1.3;margin-bottom:4px;">${n.title}</div>
+        <div style="font-size:.7rem;opacity:.9;">${n.author}</div>
+        ${novReadSet.has(n.id)?'<div style="margin-top:6px;background:#FFD93D;color:#1A1A2E;border-radius:10px;padding:2px 8px;font-size:.7rem;font-weight:800;">✅ Read!</div>':''}
+      </div>`;
+    });
+    html+='</div></div>';
+    el.innerHTML=html;
+  } else if(novView==='book'){
+    const n=NOVELS.find(x=>x.id===novCurrentId);
+    let charsHtml=n.chars.map(c=>`<div class="charcard" style="background:${n.cover}18;border:2px solid ${n.cover}44;" onclick="showChar('${c.n.replace(/'/g,"\\'")}','${c.e}','${c.d.replace(/'/g,"\\'")}')">
+      <div style="font-size:1.8rem;margin-bottom:4px;">${c.e}</div>
+      <div class="ff" style="font-size:.9rem;color:#1A1A2E;margin-bottom:3px;">${c.n}</div>
+      <div style="font-size:.76rem;color:#666;line-height:1.4;">${c.d}</div>
+    </div>`).join('');
+    el.innerHTML=`<div class="card novels-card" style="border-color:${n.cover};">
+      <button onclick="novGoLib()" style="font-family:'Fredoka One',cursive;font-size:.88rem;background:#eee;border:none;border-radius:10px;padding:6px 14px;cursor:pointer;margin-bottom:14px;">← Library</button>
+      <div style="display:flex;gap:16px;flex-wrap:wrap;align-items:flex-start;">
+        <div style="background:linear-gradient(135deg,${n.cover},${n.cover}99);border-radius:16px;padding:28px;text-align:center;color:#fff;min-width:140px;box-shadow:0 6px 20px rgba(0,0,0,.2);">
+          <div style="font-size:3.8rem;margin-bottom:10px;">${n.emoji}</div>
+          <div class="ff" style="font-size:.95rem;line-height:1.3;">${n.title}</div>
+          <div style="font-size:.78rem;opacity:.9;margin-top:5px;">${n.author}</div>
+        </div>
+        <div style="flex:1;min-width:210px;">
+          <div class="ff" style="font-size:1.4rem;color:#1A1A2E;margin-bottom:8px;">${n.title}</div>
+          <div style="font-size:.87rem;color:#444;line-height:1.65;background:#FFF8E7;border-radius:12px;padding:14px;border:2px solid #FFD93D;margin-bottom:16px;">${n.summary}</div>
+          <div class="ff" style="color:#9B5DE5;font-size:1rem;margin-bottom:10px;">👥 Meet the Characters:</div>
+          <div class="charsgrid">${charsHtml}</div>
+          <button onclick="novGoRead()" style="width:100%;padding:12px;font-family:'Fredoka One',cursive;font-size:1.1rem;background:${n.cover};color:#fff;border:none;border-radius:14px;cursor:pointer;box-shadow:0 4px 14px ${n.cover}66;">📖 Read the Story!</button>
+        </div>
+      </div>
+    </div>`;
+  } else if(novView==='read'){
+    const n=NOVELS.find(x=>x.id===novCurrentId);
+    const p=novCurrentPage;const total=n.pages.length;
+    const bars=n.pages.map((_,i)=>`<div style="flex:1;height:6px;border-radius:3px;background:${i<=p?n.cover:'#eee'};transition:background .3s;"></div>`).join('');
+    const isLast=p===total-1;
+    el.innerHTML=`<div class="card novels-card" style="border-color:${n.cover};max-width:680px;margin:0 auto;">
+      <div style="display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px;margin-bottom:14px;">
+        <button onclick="novGoBook()" style="font-family:'Fredoka One',cursive;font-size:.88rem;background:#eee;border:none;border-radius:10px;padding:6px 14px;cursor:pointer;">← Back</button>
+        <div class="ff" style="color:${n.cover};font-size:.95rem;">📖 ${n.title}</div>
+        <div class="ff" style="color:#bbb;font-size:.85rem;">Page ${p+1} / ${total}</div>
+      </div>
+      <div style="display:flex;gap:4px;margin-bottom:14px;">${bars}</div>
+      <div class="pagetext">${n.pages[p]}</div>
+      <div style="display:flex;gap:10px;justify-content:center;">
+        ${p>0?`<button onclick="novPrevPage()" style="padding:10px 22px;font-family:'Fredoka One',cursive;font-size:1rem;background:#eee;color:#1A1A2E;border:none;border-radius:12px;cursor:pointer;">← Previous</button>`:''}
+        <button onclick="${isLast?'novFinish()':'novNextPage()'}" style="padding:10px 28px;font-family:'Fredoka One',cursive;font-size:1rem;background:${n.cover};color:#fff;border:none;border-radius:12px;cursor:pointer;box-shadow:0 4px 14px ${n.cover}66;">
+          ${isLast?'🎉 Finish Story!':'Next Page →'}
+        </button>
+      </div>
+    </div>`;
+  }
+}
+
+function openBook(id){novCurrentId=id;novCurrentPage=0;novView='book';renderNovels();}
+function novGoLib(){novView='library';renderNovels();}
+function novGoBook(){novView='book';renderNovels();}
+function novGoRead(){novView='read';novCurrentPage=0;renderNovels();}
+function novNextPage(){novCurrentPage++;renderNovels();}
+function novPrevPage(){novCurrentPage--;renderNovels();}
+function novFinish(){
+  if(!novReadSet.has(novCurrentId)){novReadSet.add(novCurrentId);updScore('stories',1);}
+  novView='book';renderNovels();
+  showPopup('🎉','Story Complete!','You finished the story! Trophy earned! 📚🏆');
+}
+function showChar(name,emoji,desc){showPopup(emoji,name,desc);}
+
+// ══════════════════════════════════════════════════════
+// INIT
+// ══════════════════════════════════════════════════════
+window.onload=function(){
+  newQuestion();
+  newWordGame();
+  initDraw();
+  initCanvas();
+  resizeCanvas();
+  renderNovels();
+};
+window.addEventListener('resize',resizeCanvas);
+document.addEventListener('mouseup',()=>{if(wsDrag){wsDrag=false;wsCheck();wsClearSel();}});
+</script>
+</body>
+</html>
